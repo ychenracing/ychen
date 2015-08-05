@@ -20,7 +20,7 @@ public interface ArticleDao {
      * 查询所有文章
      * @return List<Article>
      */
-    public List<Article> findAll();
+    public List<Article> getAll();
 
     /**
      * 根据id查找文章
@@ -56,4 +56,29 @@ public interface ArticleDao {
      * @return List<Article>
      */
     public List<Article> getByGmtCreate(Date gmtCreate);
+
+    /**
+     * 修改
+     * @param article
+     */
+    public void updateArticle(Article article);
+
+    /**
+     * 新增
+     * @param article
+     */
+    public void addArticle(Article article);
+
+    /**
+     * 根据id删除文章
+     * @param id
+     */
+    public void deleteById(int id);
+
+    /**
+     * 根据标题删除文章
+     * @param id
+     */
+    public void deleteByTitle(int title);
+
 }
