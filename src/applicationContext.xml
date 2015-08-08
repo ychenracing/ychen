@@ -57,7 +57,7 @@
 	</bean>
 	<bean id="sqlsessionfactorybean" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="mydatasource"></property>
-		<property name="mapperLocations" value="classpath:cn/edu/fudan/iipl/entity/*.xml"></property>
+		<property name="mapperLocations" value="classpath:cn/edu/fudan/iipl/mapper/*.xml"></property>
 	</bean>
 	<bean id="mapperscannerconfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="cn.edu.fudan.iipl"></property>
