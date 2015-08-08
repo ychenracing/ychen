@@ -1,12 +1,13 @@
 /**
- * iipl.fudan.edu.cn
- * Copyright (c)
+ * ychen
+ * Copyright (c).
  */
 package cn.edu.fudan.iipl.dao;
 
 import java.sql.Date;
 import java.util.List;
 
+import cn.edu.fudan.iipl.annotation.MyBatisDao;
 import cn.edu.fudan.iipl.entity.Article;
 
 /**
@@ -14,6 +15,7 @@ import cn.edu.fudan.iipl.entity.Article;
  * @author racing
  * @version $Id: ArticleDao.java, v 0.1 Aug 5, 2015 11:35:51 PM racing Exp $
  */
+@MyBatisDao
 public interface ArticleDao {
 
     /**
