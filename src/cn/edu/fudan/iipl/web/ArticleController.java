@@ -37,16 +37,16 @@ public class ArticleController {
     private ArticleDao          articleDao;
 
     /** 文章列表页面 */
-    private static final String ARTICLE_LIST_JSP       = "/WEB-INF/jsp/article/article_list.jsp";
+    private static final String ARTICLE_LIST_JSP       = "/article/article_list";
 
     /** 文章详情页面 */
-    private static final String ARTICLE_PROFILE_JSP    = "/WEB-INF/jsp/article/article_profile.jsp";
+    private static final String ARTICLE_PROFILE_JSP    = "/article/article_profile";
 
     /** 创建文章页面 */
-    private static final String ADD_ARTICLE_JSP        = "/WEB-INF/jsp/article/add_article.jsp";
+    private static final String ADD_ARTICLE_JSP        = "/article/add_article";
 
     /** 文章创建结果页面 */
-    private static final String ADD_ARTICLE_RESULT_JSP = "/WEB-INF/jsp/article/add_article_result.jsp";
+    private static final String ADD_ARTICLE_RESULT_JSP = "/article/add_article_result";
 
     /**
      * 显示文章列表页面
@@ -85,7 +85,7 @@ public class ArticleController {
      * @return 文章创建页面JSP
      */
     @RequestMapping(value = "/addArticle", method = { RequestMethod.GET })
-    public String showAddArticle(ModelMap model) {
+    public String showAddArticle(ArticleForm articleForm, ModelMap model) {
         return ADD_ARTICLE_JSP;
     }
 
