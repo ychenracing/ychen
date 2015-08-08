@@ -1,5 +1,5 @@
 /**
- * cn.edu.fudan.iipl
+ * ychen.
  * Copyright (c).
  */
 package cn.edu.fudan.iipl.util;
@@ -19,7 +19,7 @@ public class ArticleConvertor {
      * @param form
      * @return Article
      */
-    public static Article convertToArticleForm(ArticleForm form) {
+    public static Article convertArticleFormToArticle(ArticleForm form) {
         Article article = new Article();
         article.setTitle(form.getTitle());
         article.setMainBody(form.getMainBody());
