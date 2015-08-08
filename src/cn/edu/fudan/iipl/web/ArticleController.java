@@ -96,7 +96,7 @@ public class ArticleController {
      * @param model
      * @return 文章创建结果页面JSP
      */
-    @RequestMapping(value = "addArticle", method = { RequestMethod.POST })
+    @RequestMapping(value = "/addArticle", method = { RequestMethod.POST })
     public String doAddArticle(ArticleForm articleForm, BindingResult bindingResult, ModelMap model) {
         if (bindingResult.hasErrors()) {
             model
