@@ -12,7 +12,7 @@
 	<!-- 数据区域：用表格展示数据 -->
 	<div id="data">
 		<input type="button" value="增加" class="btn_add"
-			onclick="location.href='toAdd';" />
+			onclick="location.href='addArticle';" />
 		<table id="datalist">
 			<c:forEach items="${articles}" var="article">
 				<tr>
@@ -37,7 +37,7 @@
 				</tr>
 				<tr>
 					<td>内容</td>
-					<td>${article.mainBody.subString(0.151)}</td>
+					<td>${article.mainBody}</td>
 				</tr>
 			</c:forEach>
 		</table>

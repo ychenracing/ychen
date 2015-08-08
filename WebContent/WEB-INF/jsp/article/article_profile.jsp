@@ -5,6 +5,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../static/css/bootstrap.css">
+<link rel="stylesheet" href="../../static/font-awesome-4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../../static/css/simplemde.min.css">
+<script src="../../static/js/jquery-2.1.1.js"></script>
+<script src="../../static/js/bootstrap.js"></script>
+<script src="../../static/js/simplemde.min.js"></script>
+<script src="../../static/js/marked.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -31,7 +39,13 @@
 				</tr>
 				<tr>
 					<td>内容</td>
-					<td>${article.mainBody}</td>
+					<td>
+					
+					<script>marked('${article.mainBody}');
+  </script>
+					
+					
+					</td>
 				</tr>
 		</table>
 </body>
