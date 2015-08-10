@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -18,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.edu.fudan.iipl.dao.ArticleDao;
 import cn.edu.fudan.iipl.entity.Article;
-import cn.edu.fudan.iipl.enums.BlogExceptionEnum;
-import cn.edu.fudan.iipl.exception.BlogException;
 import cn.edu.fudan.iipl.form.ArticleForm;
 import cn.edu.fudan.iipl.util.ArticleConvertor;
 
@@ -31,6 +30,8 @@ import cn.edu.fudan.iipl.util.ArticleConvertor;
 @Controller
 @RequestMapping("/article")
 public class ArticleController {
+
+    private static final Logger logger                 = Logger.getLogger(ArticleController.class);
 
     /** articleDao对象 */
     @Resource(type = ArticleDao.class)
@@ -57,6 +58,9 @@ public class ArticleController {
     public String showList(ModelMap model) {
         List<Article> articleList = articleDao.getAll();
         model.addAttribute("articles", articleList);
+        if (logger.isInfoEnabled()) {
+            logger.info(articleList);
+        }
         return ARTICLE_LIST_JSP;
     }
 
@@ -67,11 +71,12 @@ public class ArticleController {
      */
     @RequestMapping(value = "/profile/{id}", method = { RequestMethod.GET })
     public String showProfile(ModelMap model, @PathVariable String id) {
-        int articleId;
+        int articleId = 0;
         try {
             articleId = Integer.parseInt(id);
         } catch (Exception e) {
-            throw new BlogException(BlogExceptionEnum.ARTICLE_ID_NOT_FOUND);
+            logger.error("文章不存在，没找到该文章", e);
+            //            throw new BlogException(BlogExceptionEnum.ARTICLE_ID_NOT_FOUND);
         }
 
         Article article = articleDao.getById(articleId);
