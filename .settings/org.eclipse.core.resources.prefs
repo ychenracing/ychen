@@ -1,3 +1,4 @@
 eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/props/log4j.properties=GBK
 encoding//WebContent/WEB-INF/static/js/Grid.js=UTF-8
 encoding/<project>=UTF-8
