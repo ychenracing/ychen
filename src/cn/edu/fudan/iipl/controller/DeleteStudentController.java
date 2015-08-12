@@ -1,4 +1,4 @@
-package cn.edu.fudan.iipl.web;
+package cn.edu.fudan.iipl.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

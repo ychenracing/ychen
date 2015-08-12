@@ -2,7 +2,7 @@
  * ychen
  * Copyright (c).
  */
-package cn.edu.fudan.iipl.web;
+package cn.edu.fudan.iipl.controller;
 
 import java.sql.Date;
 import java.util.List;
@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.edu.fudan.iipl.dao.ArticleDao;
 import cn.edu.fudan.iipl.entity.Article;
@@ -116,5 +117,12 @@ public class ArticleController {
         articleDao.addArticle(article);
 
         return ADD_ARTICLE_RESULT_JSP;
+    }
+
+    @RequestMapping(value = "/responsebody", method = RequestMethod.GET)
+    @ResponseBody
+    public Object testResponseBody() {
+        Object obj = "123" + 12;
+        return obj;
     }
 }
