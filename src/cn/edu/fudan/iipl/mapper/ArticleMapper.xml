@@ -3,98 +3,101 @@
  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="cn.edu.fudan.iipl.dao.ArticleDao">
 
-<cache eviction="LRU" size="1024" readOnly="true">  
-</cache> 
+	<!-- mybatis一级缓存是指同一个session的方法，第一次与数据库交互，第二次使用缓存，不同session则都是每个session的第一次都是与数据库交互。二级缓存是指不同session，只要调用的方法、参数相同，那么就是总的第一次交互数据库，第二次使用缓存 -->
+	<cache eviction="LRU" size="1024" readOnly="true">
+	</cache>
 
-<!-- Very Complex Result Map -->
-<resultMap type="cn.edu.fudan.iipl.entity.Article" id="articleMap">
-  <!--<constructor>
-    <idArg column="blog_id" javaType="int"/>
-  </constructor> -->
-  <id property="id" column="id" javaType="int" jdbcType="int"/>
-  <result property="title" column="title" javaType="String" jdbcType="varchar"/>
-  <result property="mainBody" column="mainbody"/>
-  <result property="category" column="category"/>
-  <result property="author" column="author"/>
-  <result property="gmtCreate" column="gmt_create"/>
-  <result property="gmtModify" column="gmt_modify"/>
-  
-  <!-- 
-  <association property="author" javaType="Author">
-    <id property="id" column="author_id"/>
-    <result property="username" column="author_username"/>
-    <result property="password" column="author_password"/>
-    <result property="email" column="author_email"/>
-    <result property="bio" column="author_bio"/>
-    <result property="favouriteSection" column="author_favourite_section"/>
-  </association>
-  <collection property="posts" ofType="Post">
-    <id property="id" column="post_id"/>
-    <result property="subject" column="post_subject"/>
-    <association property="author" javaType="Author"/>
-    <collection property="comments" ofType="Comment">
-      <id property="id" column="comment_id"/>
-    </collection>
-    <collection property="tags" ofType="Tag" >
-      <id property="id" column="tag_id"/>
-    </collection>
-    <discriminator javaType="int" column="draft">
-      <case value="1" resultType="DraftPost"/>
-    </discriminator>
-  </collection>  -->
-</resultMap>
+	<!-- Very Complex Result Map -->
+	<resultMap type="cn.edu.fudan.iipl.entity.Article" id="articleMap">
+		<!--<constructor> <idArg column="blog_id" javaType="int"/> </constructor> -->
+		<id property="id" column="id" javaType="int" jdbcType="int" />
+		<result property="title" column="title" javaType="String"
+			jdbcType="varchar" />
+		<result property="mainBody" column="mainbody" />
+		<result property="category" column="category" />
+		<result property="author" column="author" />
+		<result property="gmtCreate" column="gmt_create" />
+		<result property="gmtModify" column="gmt_modify" />
+
+		<!-- <association property="author" javaType="Author"> <id property="id" 
+			column="author_id"/> <result property="username" column="author_username"/> 
+			<result property="password" column="author_password"/> <result property="email" 
+			column="author_email"/> <result property="bio" column="author_bio"/> <result 
+			property="favouriteSection" column="author_favourite_section"/> </association> 
+			<collection property="posts" ofType="Post"> <id property="id" column="post_id"/> 
+			<result property="subject" column="post_subject"/> <association property="author" 
+			javaType="Author"/> <collection property="comments" ofType="Comment"> <id 
+			property="id" column="comment_id"/> </collection> <collection property="tags" 
+			ofType="Tag" > <id property="id" column="tag_id"/> </collection> <discriminator 
+			javaType="int" column="draft"> <case value="1" resultType="DraftPost"/> </discriminator> 
+			</collection> -->
+	</resultMap>
 
 
-	<!--                       select                       -->
+	<!-- select -->
 
-    <select id="getAll" resultMap="articleMap" useCache="true">
-        select * from article
-    </select>
-    
-    <select id="getById" parameterType="int" resultMap="articleMap" useCache="true">
-        select * from article where id=#{id}
-    </select>
-    
-    <select id="getByTitle" parameterType="String" resultMap="articleMap" useCache="true">
-        select * from article where title=#{title}
-    </select>
-    
-    <select id="getByCategory" parameterType="String" resultMap="articleMap" useCache="true">
-        select * from article where category=#{category}
-    </select>
-    
-    <select id="getByAuthor" parameterType="String" resultMap="articleMap" useCache="true">
-        select * from article where author=#{author}
-    </select>
-    
-    <select id="getByGmtCreate" parameterType="java.sql.Date" resultMap="articleMap" useCache="true">
-        select * from article where gmt_create=#{gmtCreate}
-    </select>
+	<select id="getAll" resultMap="articleMap" flushCache="false"
+		useCache="true">
+		select * from article
+	</select>
 
-    
-    <!--                       update                        -->
-    
-    <update id="updateArticle" parameterType="cn.edu.fudan.iipl.entity.Article">
-        update article set
-        title=#{title},mainbody=#{mainBody},category=#{category},author=#{author},gmt_modify=#{gmtModify} where id=#{id}
-    </update>
-    
-    
-    <!--                       insert                       -->
-    
-    <insert id="addArticle" parameterType="cn.edu.fudan.iipl.entity.Article">
-        insert into article(title,mainbody,category,author,gmt_create,gmt_modify) values(#{title},#{mainBody},#{category},#{author},#{gmtCreate},#{gmtModify})
-    </insert>
-    
-    
-    <!--                       delete                       -->
-    
-    <delete id="deleteById" parameterType="int">
-        delete from article where id=#{id}
-    </delete>
-    
-    <delete id="deleteByTitle" parameterType="String">
-        delete from article where title=#{title}
-    </delete>
-    
+	<select id="getById" parameterType="int" flushCache="false"
+		resultMap="articleMap" useCache="true">
+		select * from article where id=#{id}
+	</select>
+
+	<select id="getByTitle" parameterType="String" resultMap="articleMap"
+		flushCache="false" useCache="true">
+		select * from article where title=#{title}
+	</select>
+
+	<select id="getByCategory" parameterType="String" resultMap="articleMap"
+		flushCache="false" useCache="true">
+		select * from article where
+		category=#{category}
+	</select>
+
+	<select id="getByAuthor" parameterType="String" resultMap="articleMap"
+		flushCache="false" useCache="true">
+		select * from article where
+		author=#{author}
+	</select>
+
+	<select id="getByGmtCreate" parameterType="java.sql.Date"
+		resultMap="articleMap" flushCache="false" useCache="true">
+		select * from
+		article where gmt_create=#{gmtCreate}
+	</select>
+
+
+	<!-- update -->
+
+	<update id="updateArticle" parameterType="cn.edu.fudan.iipl.entity.Article"
+		flushCache="true">
+		update article set
+		title=#{title},mainbody=#{mainBody},category=#{category},author=#{author},gmt_modify=#{gmtModify}
+		where id=#{id}
+	</update>
+
+
+	<!-- insert -->
+
+	<insert id="addArticle" parameterType="cn.edu.fudan.iipl.entity.Article"
+		useGeneratedKeys="true" keyProperty="id" flushCache="true">
+		insert into
+		article(title,mainbody,category,author,gmt_create,gmt_modify)
+		values(#{title},#{mainBody},#{category},#{author},#{gmtCreate},#{gmtModify})
+	</insert>
+
+	<!-- delete -->
+
+	<delete id="deleteById" parameterType="int" flushCache="true">
+		delete
+		from article where id=#{id}
+	</delete>
+
+	<delete id="deleteByTitle" parameterType="String" flushCache="true">
+		delete from article where title=#{title}
+	</delete>
+
 </mapper>
