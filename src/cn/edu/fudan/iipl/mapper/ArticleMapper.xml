@@ -3,13 +3,16 @@
  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="cn.edu.fudan.iipl.dao.ArticleDao">
 
+<cache eviction="LRU" size="1024" readOnly="true">  
+</cache> 
+
 <!-- Very Complex Result Map -->
 <resultMap type="cn.edu.fudan.iipl.entity.Article" id="articleMap">
   <!--<constructor>
     <idArg column="blog_id" javaType="int"/>
   </constructor> -->
-  <id property="id" column="id"/>
-  <result property="title" column="title"/>
+  <id property="id" column="id" javaType="int" jdbcType="int"/>
+  <result property="title" column="title" javaType="String" jdbcType="varchar"/>
   <result property="mainBody" column="mainbody"/>
   <result property="category" column="category"/>
   <result property="author" column="author"/>
@@ -44,27 +47,27 @@
 
 	<!--                       select                       -->
 
-    <select id="getAll" resultMap="articleMap">
+    <select id="getAll" resultMap="articleMap" useCache="true">
         select * from article
     </select>
     
-    <select id="getById" parameterType="int" resultMap="articleMap">
+    <select id="getById" parameterType="int" resultMap="articleMap" useCache="true">
         select * from article where id=#{id}
     </select>
     
-    <select id="getByTitle" parameterType="String" resultMap="articleMap">
+    <select id="getByTitle" parameterType="String" resultMap="articleMap" useCache="true">
         select * from article where title=#{title}
     </select>
     
-    <select id="getByCategory" parameterType="String" resultMap="articleMap">
+    <select id="getByCategory" parameterType="String" resultMap="articleMap" useCache="true">
         select * from article where category=#{category}
     </select>
     
-    <select id="getByAuthor" parameterType="String" resultMap="articleMap">
+    <select id="getByAuthor" parameterType="String" resultMap="articleMap" useCache="true">
         select * from article where author=#{author}
     </select>
     
-    <select id="getByGmtCreate" parameterType="java.sql.Date" resultMap="articleMap">
+    <select id="getByGmtCreate" parameterType="java.sql.Date" resultMap="articleMap" useCache="true">
         select * from article where gmt_create=#{gmtCreate}
     </select>
 
