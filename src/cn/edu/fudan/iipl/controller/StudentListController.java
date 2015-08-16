@@ -1,4 +1,4 @@
-package cn.edu.fudan.iipl.web;
+package cn.edu.fudan.iipl.controller;
 
 import java.util.List;
 
@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cn.edu.fudan.iipl.dao.StudentMyBatisDao;
 import cn.edu.fudan.iipl.entity.Page;
 import cn.edu.fudan.iipl.entity.Student;
-
-import com.alibaba.fastjson.JSONArray;
 
 @Controller
 @RequestMapping("/student")
@@ -28,7 +26,7 @@ public class StudentListController {
     public String execute(Page page, Model model) {
         System.out.println("inlist");
         List<Student> list = dao.findAll();
-        JSONArray ja = new JSONArray();
+        // JSONArray ja = new JSONArray();
         model.addAttribute("students", list);
         return "student/student_list";
     }

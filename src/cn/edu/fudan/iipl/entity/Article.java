@@ -4,6 +4,7 @@
  */
 package cn.edu.fudan.iipl.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
@@ -11,28 +12,31 @@ import java.sql.Date;
  * @author racing
  * @version $Id: Article.java, v 0.1 Aug 5, 2015 11:24:25 PM racing Exp $
  */
-public class Article {
+public class Article implements Serializable {
+
+    /**  */
+    private static final long serialVersionUID = 3223956682492239527L;
 
     /** 文章id */
-    private int    id;
+    private int               id;
 
     /** 标题 */
-    private String title;
+    private String            title;
 
     /** 正文 */
-    private String mainBody;
+    private String            mainBody;
 
     /** 分类 */
-    private String category;
+    private String            category;
 
     /** 作者 */
-    private String author;
+    private String            author;
 
     /** 创建时间 */
-    private Date   gmtCreate;
+    private Date              gmtCreate;
 
     /** 最后修改时间 */
-    private Date   gmtModify;
+    private Date              gmtModify;
 
     /**
      * Getter method for property <tt>id</tt>.
