@@ -7,6 +7,8 @@ package cn.edu.fudan.iipl.dao;
 import java.sql.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import cn.edu.fudan.iipl.annotation.MyBatisDao;
 import cn.edu.fudan.iipl.entity.Article;
 
@@ -43,7 +45,7 @@ public interface ArticleDao {
      * @param category
      * @return List<Article>
      */
-    public List<Article> getByCategory(String category);
+    public List<Article> getByCategory(@Param(value = "") String category);
 
     /**
      * 根据作者查找文章
